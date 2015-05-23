@@ -10,7 +10,7 @@ var playerWrapper = new PlayerWrapper();
 soundcloudWrapper.init();
 var protonet = new ProtonetListener();
 
-sc.init();
+soundcloudWrapper.init();
 protonet.init();
 
 function urlReceivedCallback (url) {
@@ -24,11 +24,11 @@ function urlReceivedCallback (url) {
 	});
 }
 
-protonet.listen(1000, function(url) {
-  sc.resolve(url, function(track_hash) {
+protonet.listen(5000, function(url) {
+  soundcloudWrapper.resolve(url, function(track_hash) {
     //Getting stream_url and track_data
     console.log("Added resolved URL: ", track_hash.stream_url)
-    playerWrapper.addPlaylist(track_hash);
+    playerWrapper.addToPlaylist(track_hash);
   }, function() {
     console.log("Invalid URL");
   });
